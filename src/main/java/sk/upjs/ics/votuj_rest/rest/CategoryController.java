@@ -51,7 +51,7 @@ public class CategoryController {
 	@PostMapping("/category/getbyitem")
 	public List<Category> getByItem(@RequestBody Item item) throws ObjectNotFoundException {
 		List<Category> list = categoryDao.getByItem(item);
-		if (list == null) {
+		if (list.size() == 0 || list == null) {
 			throw new ObjectNotFoundException("Category with Item name: " + item.getName()+ " not found.");
 		}
 		return list;

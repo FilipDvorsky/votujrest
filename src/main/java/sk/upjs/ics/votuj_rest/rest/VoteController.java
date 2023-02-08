@@ -51,7 +51,7 @@ public class VoteController {
 	@PostMapping("/vote/getbyparty")
 	public List<Vote> getByParty(@RequestBody Party party) throws ObjectNotFoundException {
 		List<Vote> votes = voteDao.getByParty(party);
-		if (votes == null) {
+		if (votes.size() == 0 || votes == null) {
 			throw new ObjectNotFoundException("Admin with Party name " + party.getName()+ " not found.");
 		}
 		return votes;

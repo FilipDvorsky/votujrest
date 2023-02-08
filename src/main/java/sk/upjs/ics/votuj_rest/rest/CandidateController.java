@@ -103,10 +103,10 @@ public class CandidateController {
 	
 	@PostMapping("/candidate/getbytermparty")
 	public List<Candidate> getByTermParty(@RequestBody PartyTerm partyTerm) throws ObjectNotFoundException {
-		List<Candidate> list = candidateDao.getByTermParty(partyTerm.getParty(), partyTerm.getTerm());
-		if (list.size() == 0) {
+		List<Candidate> candidates = candidateDao.getByTermParty(partyTerm.getParty(), partyTerm.getTerm());
+		if (candidates.size() == 0 || candidates == null) {
 			throw new ObjectNotFoundException("Candidate with " + partyTerm.getParty().getName()+" "+ partyTerm.getTerm().getSince()+" to "+partyTerm.getTerm().getTo()+" not found.");
 		}
-		return list;
+		return candidates;
 	}
 }

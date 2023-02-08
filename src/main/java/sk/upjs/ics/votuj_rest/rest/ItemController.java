@@ -112,7 +112,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/item/getbyid/{id}")
-	public Item getById(Long id) {
+	public Item getById(@PathVariable Long id) throws ObjectNotFoundException {
 		Item item = itemDao.getById(id);
 		if (item == null) {
 			throw new ObjectNotFoundException("Item with id "+id+" was not found.");
@@ -139,23 +139,39 @@ public class ItemController {
 	}
 	
 	@PostMapping("/item/getbyterm")
-	public List<Item> getByTerm(@RequestBody Term term) {
-		return itemDao.getByTerm(term);
+	public List<Item> getByTerm(@RequestBody Term term) throws ObjectNotFoundException {
+		List<Item> items = itemDao.getByTerm(term);
+		if (items.size() == 0 || items == null) {
+			throw new ObjectNotFoundException("Items were was not found.");
+		}
+		return items;
 	}
 	
 	@PostMapping("/item/getbytermparty")
-	public List<Item> getByTermParty(@RequestBody TermParty termParty) {
-		return itemDao.getByTermParty(termParty.getTerm(), termParty.getParty());
+	public List<Item> getByTermParty(@RequestBody TermParty termParty) throws ObjectNotFoundException {
+		List<Item> items = itemDao.getByTermParty(termParty.getTerm(), termParty.getParty());
+		if (items.size() == 0 || items == null) {
+			throw new ObjectNotFoundException("Items were was not found.");
+		}
+		return items;
 	}
 	
 	@PostMapping("/item/getbytermpartycategory")
-	public List<Item> getByTermPartyCategory(@RequestBody TermPartyCategory termPartyCategory) {
-		return itemDao.getByTermPartyCategory(termPartyCategory.getTerm(), termPartyCategory.getParty(), termPartyCategory.getCategory());
+	public List<Item> getByTermPartyCategory(@RequestBody TermPartyCategory termPartyCategory) throws ObjectNotFoundException {
+		List<Item> items = itemDao.getByTermPartyCategory(termPartyCategory.getTerm(), termPartyCategory.getParty(), termPartyCategory.getCategory());
+		if (items.size() == 0 || items == null) {
+			throw new ObjectNotFoundException("Items were was not found.");
+		}
+		return items;
 	}
 	
 	@PostMapping("/item/getbyprogramcategory")
-	public List<Item> getByProgramCategory(@RequestBody ProgramCategory programCategory) {
-		return itemDao.getByProgramCategory(programCategory.getProgram(), programCategory.getCategory());
+	public List<Item> getByProgramCategory(@RequestBody ProgramCategory programCategory) throws ObjectNotFoundException {
+		List<Item> items = itemDao.getByProgramCategory(programCategory.getProgram(), programCategory.getCategory());
+		if (items.size() == 0 || items == null) {
+			throw new ObjectNotFoundException("Items were was not found.");
+		}
+		return items;
 	}
 	
 	

@@ -3,6 +3,7 @@ package sk.upjs.ics.votuj_rest.rest;
 import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,4 +58,10 @@ public class ExceptionAdvice {
 	public String handleObjectNotFoundException(ObjectNotFoundException e) {
 		return e.getMessage();
 	}
+	
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "CUSTOM MESSAGE HERE")
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public String handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+		return e.getMessage();
+    }
 }

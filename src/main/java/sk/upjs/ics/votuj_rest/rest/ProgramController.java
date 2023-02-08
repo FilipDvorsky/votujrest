@@ -70,20 +70,20 @@ public class ProgramController {
 	
 	@PostMapping("/program/getbyparty")
 	public List<Program> getByParty(@RequestBody Party party) throws ObjectNotFoundException{
-		List<Program> list = programDao.getByParty(party);
-		if(list.size()==0) {
+		List<Program> program = programDao.getByParty(party);
+		if(program.size()==0) {
 			throw new ObjectNotFoundException("Programs are not found");
 		}
-		return list;
+		return program;
 	}
 	
 	@PostMapping("/program/getbytermparty")
 	public List<Program> getByParty(@RequestBody TermParty termParty) throws ObjectNotFoundException{
-		List<Program> list = programDao.getByTermParty(termParty.getTerm(), termParty.getParty());
-		if(list.size()==0) {
+		List<Program> programs = programDao.getByTermParty(termParty.getTerm(), termParty.getParty());
+		if(programs.size() == 0 || programs == null) {
 			throw new ObjectNotFoundException("Programs are not found");
 		}
-		return list;
+		return programs;
 	}
 	
 }

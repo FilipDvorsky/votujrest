@@ -51,7 +51,7 @@ public class TermController {
 	@PostMapping("/term/getbycandidate")
 	public List<Term> getByCandidate(@RequestBody Candidate candidate) throws ObjectNotFoundException{
 		List<Term> terms = termDao.getByCandidate(candidate);
-		if (terms == null) {
+		if (terms.size() == 0 || terms == null) {
 			throw new ObjectNotFoundException("Term with Candidate id " + candidate.getId()+ " not found.");
 		}
 		return terms;

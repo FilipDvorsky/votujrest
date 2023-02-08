@@ -22,11 +22,12 @@ public class VoteController {
 	VoteDao voteDao = DaoFactory.INSTANCE.getVoteDao();
 	
 	@DeleteMapping("/vote/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = voteDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Vote "+id+" not found");
 		}
+		return result;
 	}
 	
 	@PostMapping("/vote/save")

@@ -85,11 +85,12 @@ public class CandidateController {
 	}
 	
 	@DeleteMapping("/candidate/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = candidateDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Candidate "+id+" not found");
 		}
+		return result;
 	}
 	
 	@GetMapping("/candidate/getbyid/{id}")

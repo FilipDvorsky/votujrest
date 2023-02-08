@@ -21,11 +21,12 @@ public class RegionController {
 	RegionDao regionDao = DaoFactory.INSTANCE.getRegionDao();
 	
 	@DeleteMapping("/region/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = regionDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Region with id " + id+ " not found.");
 		}
+		return result;
 	}
 	
 	@PostMapping("/region/save")

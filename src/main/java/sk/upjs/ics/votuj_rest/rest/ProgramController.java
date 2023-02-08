@@ -56,11 +56,12 @@ public class ProgramController {
 	}
 	
 	@DeleteMapping("/program/delete/{id}")
-	public void delete(@PathVariable Long id)throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id)throws ObjectNotFoundException {
 		boolean result = programDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Program "+id+" not found");
 		}
+		return result;
 	}
 	
 	@PostMapping("/program/save")

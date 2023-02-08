@@ -36,11 +36,12 @@ public class CategoryController {
 	}
 	
 	@DeleteMapping("/category/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = categoryDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Category "+id+" not found");
 		}
+		return result;
 	}
 	
 	@PostMapping("/category/save")

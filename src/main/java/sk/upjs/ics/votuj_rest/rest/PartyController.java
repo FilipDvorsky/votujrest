@@ -21,11 +21,12 @@ public class PartyController {
 	PartyDao partyDao = DaoFactory.INSTANCE.getPartyDao();
 	
 	@DeleteMapping("/party/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = partyDao.delete(id);
 		if(!result) {
 			throw new ObjectNotFoundException("Party with id "+ id + " was not found.");
 		}
+		return result;
 	}
 	
 	@PostMapping("/party/save")

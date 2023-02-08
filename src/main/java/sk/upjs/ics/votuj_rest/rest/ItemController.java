@@ -126,11 +126,12 @@ public class ItemController {
 	}
 	
 	@DeleteMapping("/item/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = itemDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Item with id "+id+" not found");
 		}
+		return result;
 	}
 	
 	@PostMapping("/item/getbyprogram")

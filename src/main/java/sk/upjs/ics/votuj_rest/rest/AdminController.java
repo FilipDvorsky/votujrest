@@ -33,10 +33,11 @@ public class AdminController {
 	}
 
 	@DeleteMapping("/admin/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = adminDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Admin "+id+" not found");
 		}
+		return result;
 	}
 }

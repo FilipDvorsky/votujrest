@@ -22,11 +22,12 @@ public class TermController {
 	TermDao termDao = DaoFactory.INSTANCE.getTermDao();
 	
 	@DeleteMapping("/term/delete/{id}")
-	public void delete(@PathVariable Long id) throws ObjectNotFoundException {
+	public boolean delete(@PathVariable Long id) throws ObjectNotFoundException {
 		boolean result = termDao.delete(id);
 		if (!result) {
 			throw new ObjectNotFoundException("Term with id " + id+ " not found.");
 		}
+		return result;
 	}
 	
 	@PostMapping("/term/save")

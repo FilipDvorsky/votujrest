@@ -138,7 +138,7 @@ public class ItemController {
 		return itemDao.getByProgram(program);
 	}
 	
-	@PostMapping("/item/getbyterm")
+	@GetMapping("/item/getbyterm")
 	public List<Item> getByTerm(@RequestBody Term term) throws ObjectNotFoundException {
 		List<Item> items = itemDao.getByTerm(term);
 		if (items.size() == 0 || items == null) {
@@ -147,7 +147,7 @@ public class ItemController {
 		return items;
 	}
 	
-	@PostMapping("/item/getbytermparty")
+	@GetMapping("/item/getbytermparty")
 	public List<Item> getByTermParty(@RequestBody TermParty termParty) throws ObjectNotFoundException {
 		List<Item> items = itemDao.getByTermParty(termParty.getTerm(), termParty.getParty());
 		if (items.size() == 0 || items == null) {
@@ -156,7 +156,7 @@ public class ItemController {
 		return items;
 	}
 	
-	@PostMapping("/item/getbytermpartycategory")
+	@GetMapping("/item/getbytermpartycategory")
 	public List<Item> getByTermPartyCategory(@RequestBody TermPartyCategory termPartyCategory) throws ObjectNotFoundException {
 		List<Item> items = itemDao.getByTermPartyCategory(termPartyCategory.getTerm(), termPartyCategory.getParty(), termPartyCategory.getCategory());
 		if (items.size() == 0 || items == null) {
@@ -165,7 +165,7 @@ public class ItemController {
 		return items;
 	}
 	
-	@PostMapping("/item/getbyprogramcategory")
+	@GetMapping("/item/getbyprogramcategory")
 	public List<Item> getByProgramCategory(@RequestBody ProgramCategory programCategory) throws ObjectNotFoundException {
 		List<Item> items = itemDao.getByProgramCategory(programCategory.getProgram(), programCategory.getCategory());
 		if (items.size() == 0 || items == null) {
